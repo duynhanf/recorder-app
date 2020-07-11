@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Learning TS",
+      "dateStart": "2020-07-11T01:37:15.034Z",
+      "dateEnd": "2020-07-11T08:37:15.034Z"
+    },
+    {
+      "title": "Learning React",
+      "dateStart": "2020-07-11T01:37:15.034Z",
+      "dateEnd": "2020-07-11T01:37:15.034Z",
+      "id": 2
+    }
+  ]
+}
