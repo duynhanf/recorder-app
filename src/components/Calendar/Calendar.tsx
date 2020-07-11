@@ -21,7 +21,6 @@ const mapDispatch = {
 const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-
 interface Props extends PropsFromRedux {}
 
 const createDateKey = (date: Date) => {
@@ -71,11 +70,11 @@ const Calendar: React.FC<Props> = ({ events, loadUserEvents }) => {
       return +new Date(d2) - +new Date(d1);
     });
   }
+
   return groupedEvents && sortedGroupKeys ? (
     <div className="calendar">
       {sortedGroupKeys.map((dayKey, id) => {
         const events = groupedEvents ? groupedEvents[dayKey] : [];
-
         const groupDate = new Date(dayKey);
         const day = groupDate.getDate();
         const month = groupDate.toLocaleString(undefined, { month: "long" });

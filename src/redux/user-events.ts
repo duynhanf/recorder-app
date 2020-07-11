@@ -1,9 +1,8 @@
-import { AnyAction, Action } from "redux";
+import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "./store";
 import { selectDateStart } from "./recorder";
-
-const apiUrl = "http://localhost:3001/events";
+import userEventApi from "../api/userEventApi";
 
 export interface UserEvent {
   id: number;
@@ -43,9 +42,11 @@ export const loadUserEvents = (): ThunkAction<
 
   // request
   try {
-    const response = await fetch(apiUrl);
+    const response = await userEventApi.getAll();
 
-    const events: UserEvent[] = await response.json();
+    const events: UserEvent[] = response.data;
+
+    console.log(response);
 
     dispatch({
       type: LOAD_SUCCESS,
@@ -89,15 +90,8 @@ export const createUserEvent = (): ThunkAction<
       dateEnd: new Date().toISOString(),
     };
 
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    });
-
-    const createdEvent: UserEvent = await response.json();
+    const response = await userEventApi.post(event);
+    const createdEvent: UserEvent = response.data;
 
     dispatch({
       type: CREATE_SUCCESS,
@@ -135,11 +129,9 @@ export const deleteUserEvent = (
   });
 
   try {
-    const response = await fetch(apiUrl + `/${id}`, {
-      method: "DELETE",
-    });
+    const response = await userEventApi.delete(id);
 
-    if (response.ok) {
+    if (response.data) {
       dispatch({
         type: DELETE_SUCCESS,
         payload: {
@@ -179,15 +171,9 @@ export const updateUserEvent = (
   });
 
   try {
-    const response = await fetch(apiUrl + `/${event.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    });
+    const response = await userEventApi.put(event.id, event);
+    const updatedEvent = response.data;
 
-    const updatedEvent = await response.json();
     dispatch({
       type: UPDATE_SUCCESS,
       payload: { event: updatedEvent },
