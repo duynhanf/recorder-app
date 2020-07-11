@@ -67,12 +67,12 @@ const Calendar: React.FC<Props> = ({ events, loadUserEvents }) => {
   if (events.length) {
     groupedEvents = groupEventsByDay(events);
     sortedGroupKeys = Object.keys(groupedEvents).sort((d1, d2) => {
-      return +new Date(d1) - +new Date(d2);
+      return +new Date(d2) - +new Date(d1);
     });
   }
   return groupedEvents && sortedGroupKeys ? (
     <div className="calendar">
-      {sortedGroupKeys.map((dayKey) => {
+      {sortedGroupKeys.map((dayKey, id) => {
         const events = groupedEvents ? groupedEvents[dayKey] : [];
 
         const groupDate = new Date(dayKey);
@@ -80,7 +80,7 @@ const Calendar: React.FC<Props> = ({ events, loadUserEvents }) => {
         const month = groupDate.toLocaleString(undefined, { month: "long" });
 
         return (
-          <div className="calendar-day">
+          <div key={id} className="calendar-day">
             <div className="calendar-day-label">
               <span>
                 {day} {month}
@@ -89,12 +89,10 @@ const Calendar: React.FC<Props> = ({ events, loadUserEvents }) => {
             <div className="calendar-events">
               {events.map((event) => {
                 return (
-                  <div className="calendar-event">
+                  <div key={event.id} className="calendar-event">
                     <div className="calendar-event-info">
                       <div className="calendar-event-time">10:00 - 12:00</div>
-                      <div className="calendar-event-title">
-                        {event.title}
-                      </div>
+                      <div className="calendar-event-title">{event.title}</div>
                     </div>
                     <button className="calendar-event-delete-button">
                       &times;
