@@ -1,22 +1,16 @@
 {
   "events": [
     {
-      "id": 1,
-      "title": "Learning TS",
-      "dateStart": "2020-07-10T01:37:15.034Z",
-      "dateEnd": "2020-07-10T08:37:15.034Z"
+      "title": "Learning TypeScript",
+      "dateStart": "2020-07-11T05:04:08.862Z",
+      "dateEnd": "2020-07-11T05:04:10.251Z",
+      "id": 1
     },
     {
-      "title": "Learning React",
-      "dateStart": "2020-07-09T01:37:15.034Z",
-      "dateEnd": "2020-07-09T02:37:15.034Z",
+      "title": "Learning Android",
+      "dateStart": "2020-07-11T05:29:56.698Z",
+      "dateEnd": "2020-07-11T05:29:58.029Z",
       "id": 2
-    },
-    {
-      "title": "No name",
-      "dateStart": "2020-07-11T04:42:20.289Z",
-      "dateEnd": "2020-07-11T04:42:24.035Z",
-      "id": 3
     }
   ]
 }
