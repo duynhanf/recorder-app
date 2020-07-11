@@ -2,7 +2,9 @@ import { AnyAction, Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "./store";
 
-interface UserEvent {
+const apiUrl = "http://localhost:3001";
+
+export interface UserEvent {
   id: number;
   title: string;
   dateStart: string;
@@ -40,7 +42,7 @@ export const loadUserEvents = (): ThunkAction<
 
   // request
   try {
-    const response = await fetch("http://localhost:3001/events");
+    const response = await fetch(apiUrl + "/events");
 
     const events: UserEvent[] = await response.json();
 
@@ -54,6 +56,13 @@ export const loadUserEvents = (): ThunkAction<
       errors: "Failed to load events",
     });
   }
+};
+
+const selectUserEventsState = (rootState: RootState) => rootState.userEvents;
+export const selectUserEventsArray = (rootState: RootState) => {
+  const state = selectUserEventsState(rootState);
+
+  return state.allIds.map((id) => state.byIds[id]);
 };
 
 const initialState: UserEventsState = {
