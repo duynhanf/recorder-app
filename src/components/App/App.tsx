@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import Recorder from "../Recorder";
 
 function App() {
-  return (
-    <h3>Hello world</h3>
-  );
+  return <div>
+    <Recorder />
+  </div>;
 }
 
 export default App;
